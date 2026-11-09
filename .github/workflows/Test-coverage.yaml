@@ -1,3 +1,8 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 1 optimization:
+# - [MEDIUM] Add concurrency group to "Test-coverage.yaml"
+# Estimated savings: ~2 min/run
+#
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 
@@ -8,6 +13,10 @@ on:
     branches: [CRAN]
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 name: test-coverage
 
 permissions: read-all
